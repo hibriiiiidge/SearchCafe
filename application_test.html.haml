@@ -1,0 +1,79 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html"; charset="UTF-8", "http-equiv" => "Content-Type"}/
+    %title SearchCafe
+    = include_gon
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVGM4lSwTgROn1EGtLV1zHcxMTBYfjgM4", :type => "text/javascript"}
+    %script{:src => "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"}
+    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"}
+    %link{:href => "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    %link{:href => "https://raw.githubusercontent.com/dbtek/bootstrap-vertical-tabs/master/bootstrap.vertical-tabs.css", :rel => "stylesheet"}/
+    = csrf_meta_tags
+  %body
+    .navbar-wrapper
+      .container
+        #top-nav.navbar.navbar-inverse.navbar-fixed-top{:role => navigation}
+          .container
+            .navbar-header
+              %span{:style => "margin-top:10px;margin-right:10px;float:left;"}
+                = image_tag("knife22.png")
+              = link_to "SEARCH_CAFE", root_path, id: 'logo'
+              %button.navbar-toggle.collapsed{"data-toggle" => collapse, "data-target" => ".navbar-collapse", :type => button}
+              %span.sr-only
+                Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            .navbar-collapse.collapse{:style => "height:1px;"}
+              %ul.nav.navbar-nav.navbar-right.scroll
+                - if !user_signed_in?
+                  %li= link_to 'オーナー登録', new_user_registration_path
+                - elsif !@current_owner.present?
+                  %li= link_to 'オーナー登録', new_owner_user_path
+                - if @current_owner.present?
+                  %li=link_to '新規店舗登録', new_owner_shop_path
+                %li= link_to 'HOME'
+                %li= link_to 'ABOUT'
+                - if user_signed_in?
+                  li= link_to 'MESSAGE', messagerooms_path
+                - unless user_signed_in?
+                  %li= link_to '新規登録', new_user_registration_path
+                  %li= link_to 'ログイン', new_user_session_path
+                - else
+                  %li.dropdown{:style => "height:50px;"}
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false", :href => "#", :role => "button", :style => "margin-top:-8px;"}
+                      %span
+                        %span
+                          = current_user.username
+                        %span.avator
+                          - if current_user.avatarurl.present?
+                            = image_tag(current_user.avatarurl)
+                          - else
+                            = image_tag("account4.png")
+                      %span.caret
+                    %ul.dropdown-menu
+                      - if current_user.role == "admin"
+                        %li= link_to 'ユーザー一覧（管理者用）', admin_users_path
+                        %li= link_to 'オーナー一覧（管理者用）', admin_owners_path
+                        %li= link_to 'ショップ一覧（管理者用）', admin_shops_path
+                      - else
+                        %li= link_to 'ユーザーページ', toppages_show_path
+                      - if @current_owner.present?
+                        %li= link_to 'オーナープロフィール編集', edit_owner_user_path
+                        %li= link_to '新規店舗登録', owner_shops_path
+                      %li= link_to 'プロフィール編集', edit_user_registration_path
+                      %li.divider{:role => separator}
+                      %li= link_to 'ログアウト', destroy_user_session_path, method: :delete
+   - if notice
+    %p.alert.alert-info.alert-dismissible{:role => alert, :style => "margin:0px"}
+      %button.close{"data-dismiss" => "alert", "aria-label" => "閉じる", :type => "button"}
+        %span{"aria-hidden" => true}
+          x
+      = notice
+  = yield
+  %footer
+    %p{:style => "color:#ffffff;background-color:#222;margin:30px 0 0;height:500px;text-align:center;line-height: 10em;"}
+      Copyright(C) search_cafe

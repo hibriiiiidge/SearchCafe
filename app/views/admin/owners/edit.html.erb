@@ -1,0 +1,67 @@
+<div class="page_title">登録オーナー情報編集</div>
+
+<%= form_for(@owner, url: admin_owner_path(@owner), html: { method: :put }) do |f| %>
+    <% if @owner.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@owner.errors.count, "error") %> prohibited this owner from being saved:</h2>
+            <ul>
+                <% @owner.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    
+    <div class="container form_container">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="field control-label col-md-offset-2 col-md-2">
+                    <%= f.label :last_name, "性" %>
+                </label>
+                <div class="col-md-8">
+                    <%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label class="field control-label col-md-offset-2 col-md-2">
+                    <%= f.label :first_name, "名" %>
+                </label>
+                <div class="col-md-8">
+                    <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label class="field control-label col-md-offset-2 col-md-2">
+                    <%= f.label :company_name, "会社名（屋号）" %>
+                </label>
+                <div class="col-md-8">
+                    <%= f.text_field :company_name, class: "form-control"  %>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label class="field control-label col-md-offset-2 col-md-2">
+                    <%= f.label :company_address, "住所" %>
+                </label>
+                <div class="col-md-8">
+                    <%= f.text_field :company_address, class: "form-control"  %>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label class="field control-label col-md-offset-2 col-md-2">
+                    <%= f.label :company_tel, "電話番号" %>
+                </label>
+                <div class="col-md-8">
+                    <%= f.text_field :company_tel, class: "form-control"  %>
+                </div>
+            </div>
+            <div class="actions">
+                <%= f.submit "更新", class: 'btn btn-primary btn-s' %>
+            </div>
+            <%= link_to 'Back', admin_users_path %>
+        </form>
+    </div>
+<% end %>

@@ -1,0 +1,120 @@
+<div class="container">
+    <div id="newshop_container">
+        <div class="newshop_title">新規店舗登録</div>
+        <%= form_for(@shop, url: owner_shops_path(@shop), :html => { method: :post, multipart: true, id: :fileupload }) do |f| %>
+            <% if @shop.errors.any? %>
+                <div id="error_explanation">
+                <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this owner shop from being saved:</h2>
+                    <ul>
+                    <% @shop.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                </div>
+            <% end %>
+            <div class="newshop_form" style="float:left;">
+                <form>
+                    <div class="form-group">
+                        <label class="field">
+                            <%= f.label :name, "店舗名" %>
+                        </label>
+                        <div class="input_shopname">
+                            <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "search cafe" %>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="field">
+                            <%= f.label :area, "エリア" %>
+                        </label>
+                        <div class="input_shoparea">
+                            <%= f.text_field :area, class: "form-control", placeholder: "渋谷、下北沢、横浜..." %>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group form_address">
+                        <label class="field">
+                            <%= f.label :address, "住所" %>
+                        </label>
+                        <span id="postal_mark">
+                            〒
+                        </span>
+                        <div class="input_shoppostal_code">
+                            <%= f.text_field :postal_code1, class: "form-control", placeholder: "1234567" %>
+                        </div>
+                        <div class="search_postal">
+                            <button type="button" class="btn btn-success">住所検索</button>
+                        </div>
+                        <br>
+                        <div class="input_shopaddress">
+                            <%= f.text_field :address, class: "form-control", placeholder: "東京都千代田区永田町..." %>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="field">
+                            <%= f.label :tel, "電話番号" %>
+                        </label>
+                        <div class="input_shoptel">
+                            <%= f.text_field :tel, class: "form-control", placeholder: "0312345678" %>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="field">
+                            <%= f.label :url, "webサイト" %>
+                        </label>
+                        <div class="input_shopweb">
+                            <%= f.text_field :url, class: "form-control", placeholder: "http://www.search_cafe.com" %>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="field">
+                            <%= f.label :image1, "メインイメージ" %>
+                        </label>
+                        <div class="input_shopmain">
+                            <%= f.file_field :image1, class: "form_image", accept: "image/*" %>
+                            <span class="select_image"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="field">
+                            <%= f.label :image, "店舗イメージ" %>
+                            <br>
+                        </label>
+                        <div data-role="shopimages_area" class="shopimages">
+                            <% stamp = Time.now.to_i %> <!-- タイムスタンプ -->
+                            <%= render partial: "add_shop_image", locals: { stamp: stamp }%>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="field">
+                            <%= f.label :image, "メニューイメージ" %>
+                            <br>
+                        </label>
+                        <div data-role="menuimages_area" class="menuimages">
+                            <% stamp = Time.now.to_i %> <!-- タイムスタンプ -->
+                            <%= render partial: "add_menu_image", locals: { stamp: stamp }%>
+                        </div>
+                    </div>
+                    <br>
+
+                    <%= f.hidden_field :owner_id, :value => @current_owner.id %>
+                    <div id="newshop_action">
+                        <%= f.submit "登録", class: 'btn btn-primary' %>
+                    </div>
+                </form>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<script>
+    $(function() {
+      // アップロードするファイルを選択
+      form_image_event('.form_image');
+    });
+</script>

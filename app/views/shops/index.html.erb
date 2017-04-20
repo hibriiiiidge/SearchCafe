@@ -1,0 +1,39 @@
+<!-- areashops -->
+<div class="breadcrumbs">
+    <ul>
+        <li><%= link_to 'HOME', root_path %></li>
+        <li>></li>
+        <li><%= @area %></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="areashops_top clearfix grid">
+        <% if @shops.present? %>
+            <% @shops.each do |shop| %>
+                <figure class="shop">
+                    <%= link_to (image_tag(shop.image1_url)), shop_path(shop.id) %>
+                    <figcaption class="area_shop_name">
+                        <span class="shop_name"><%= shop.name %></span>
+                    </figcaption>
+                </figure>
+            <% end %>
+        <% else %>
+            エリアの登録はありません。
+        <% end %>
+    </div>
+</div>
+
+<div style='width: 100%;'>
+  <div id="map" style='width: 100%; height: 400px;'></div>
+</div>
+
+<script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {scrollwheel: false}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers(<%=raw googlemap(@shops).to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(15);
+    });
+</script>

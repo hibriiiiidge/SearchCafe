@@ -1,0 +1,132 @@
+<div class="breadcrumbs">
+    <ul>
+        <li><%= link_to 'HOME', root_path %></li>
+        <li>></li>
+        <li><%= link_to @shop.area, areashops_path(@shop.area) %></li>
+        <li>></li>
+        <li><%= @shop.name %></li>
+    </ul>
+</div>
+
+<div class="container">
+    <%#= @messageroom.messages %>
+    <div class="detailshop_top clearfix grid">
+        <figure class="detail_shop">
+            <%= image_tag (@shop.image1_url) %>
+        </figure>
+        <div class="shop_info">
+            <ul>
+                <li><%= @shop.name %></li>
+                <li><%= @shop.address %></li>
+                <li><%= @shop.tel %></li>
+                <li><%= link_to "#{@shop.url}(test To yahoo!)", "http://www.yahoo.co.jp/", target: "_blank" %></li>
+            </ul>
+        </div>
+      <div class="shop_like_show">
+        <div class="likes_set">
+            <% if user_signed_in? %>
+                <% if current_user.likes.find_by(shop_id: @shop.id) %>
+                    <span class="like_btn">
+                        <%= render 'shops/unlike', shop: @shop %>
+                    </span>
+                <% else %>
+                    <span class="like_btn">
+                        <%= render 'shops/like', shop: @shop %>
+                    </span>
+                <% end %>
+            <% else %>
+                <span class="like_btn"><%= link_to image_tag("heart365.png"), nologin_path %></span>
+            <% end %>
+            <span class="like_nums like_num_<%= @shop.id %>">
+                <%= @shop.likes.count %>
+            </span>
+        </div>
+      </div>
+
+      <%= form_for((@messageroom), :html => { method: :post, multipart: true }) do |f| %>
+        <form>
+          <div class="form-group">
+            <div class="">
+              <% stamp = Time.now.to_i %>
+              <%= fields_for "messageroom[messages_attributes][#{stamp}]" do |ff| %>
+                <%= ff.text_area :content, id: "message_#{stamp}", class: "form-control" %>
+                <% if user_signed_in? %>
+                  <%= ff.hidden_field :user_id, :value => @current_user.id %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <% if user_signed_in? %>
+            <%= f.hidden_field :user_id, :value => @current_user.id %>
+            <%= f.hidden_field :shop_id, :value => @shop.id %>
+            <div class="msg_btn">
+              <%= f.submit "メッセージ送信", class: 'btn btn-primary btn-md' %>
+            </div>
+          <% else %>
+            <span class="btn btn-primary btn-md nologin msg_btn">
+              <%= link_to "メッセージ送信", nologin_path %>
+            </span>
+          <% end %>
+        </form>
+      <% end %>
+    </div>
+</div>
+<!---SEARCH END----->
+<div id="select_tab">
+    <ul class="nav nav-tabs" style="margin-bottom: -1.5px;">
+        <li class="active"><a href="#tab1" data-toggle="tab">ATOMS</a></li>
+        <li><a href="#tab2" data-toggle="tab">FOOD&DRINK</a></li>
+    </ul>
+</div>
+<!--TAB START-->
+
+<!--TAB START-->
+<div id="myTabContent" class="tab-content" style="padding-top: 50px;border-top: 1px #eee solid;">
+    <!--TAB ATOMS START-->
+    <div class="tab-pane fade in active" id="tab1">
+        <div class="container">
+            <p class="">Atoms</p>
+            <div id="" class="top_shops clearfix grid">
+                <% @shop.shopimages.each do |i| %>
+                    <% unless i.image.blank? %>
+                        <figure class="shop_atoms">
+                            <%= image_tag i.image %>
+                        </figure>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <!--TAB ATOMS END-->
+    <!--TAB FOOD DRINK START-->
+    <div class="tab-pane fade" id="tab2">
+        <div class="container">
+            <p class="">Food & Drink</p>
+            <div id="" class="top_shops clearfix grid">
+                <% @shop.menuimages.each do |i| %>
+                    <% unless i.image.blank? %>
+                        <figure class="shop_menus">
+                            <%= image_tag i.image %>
+                        </figure>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <!--TAB FOOD DRINK END-->
+</div>
+<!-- TAB END -->
+
+<div style='width: 100%;'>
+  <div id="map" style='width: 100%; height: 400px;'></div>
+</div>
+
+<script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {scrollwheel: false}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw googlemap(@shop).to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(17);
+    });
+</script>

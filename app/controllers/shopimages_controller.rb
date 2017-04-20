@@ -1,0 +1,2 @@
+class ShopimagesController < ApplicationController
+end

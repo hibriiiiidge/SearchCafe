@@ -1,0 +1,40 @@
+<div class="page_title">オーナー一覧</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>user_id</th>
+            <th>性</th>
+            <th>名</th>
+            <th>会社名</th>
+            <th>会社住所</th>
+            <th>会社電話番号</th>
+            <th>ショップ</th>
+            <th>Edit</th>
+            <th>Destroy</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @owners.each_with_index do |owner, i| %>
+        <tr>
+            <td><%= i+1 %></td>
+            <td><%= owner.user_id %></td>
+            <td><%= owner.last_name %></td>
+            <td><%= owner.first_name %></td>
+            <td><%= owner.company_name %></td>
+            <td><%= owner.company_address %></td>
+            <td><%= owner.company_tel %></td>
+            <td>
+            <% @ownershops = owner.shops %>
+            <% @ownershops.each do |ownershop| %>
+                <%= ownershop.name %>
+            <% end %>
+            </td>
+            <td><%= link_to 'Edit', edit_admin_owner_path(owner), class: 'btn btn-warning btn-s' %></td>
+            <td><%= link_to 'Destroy', admin_owner_path(owner), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-s' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

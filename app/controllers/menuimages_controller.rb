@@ -1,0 +1,2 @@
+class MenuimagesController < ApplicationController
+end

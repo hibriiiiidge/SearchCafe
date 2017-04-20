@@ -1,0 +1,122 @@
+<div id="home">
+<!---TOP IMAGE START----->
+    <div id="top_image" class="" data-ride="">
+        <div class="top_image_inner">
+            <%= image_tag("back3.jpg") %>
+        </div>
+    </div>
+    <!-- @TODO video導入予定-->
+    <!--<div class="homepage-hero-module">-->
+    <!--    <div class="video-container">-->
+    <!--        <div class="filter"></div>-->
+    <!--        <video class="fillWidth" autoplay loop>-->
+    <!--            <%#= video_tag(["coffee.mp4"], :controls => true) %>-->
+    <!--        </video>-->
+    <!--        <div class="poster hidden">-->
+    <!--            <%#= image_tag("back3.jpg") %>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+<!---TOP IMAGE END----->
+</div>
+<!---SEARCH START----->
+<div class="seach">
+    <!-- @TODO 検索機能 -->
+    <%= form_tag root_path , method: :get do %>
+        <%= text_field_tag :q , params[:q], placeholder: "キーワードを入力", required: true, :size => '70' %>
+        <%= submit_tag "SEARCH", name: nil , class: "btn", data: { disable_with: "検索中..."} %>
+    <% end %>
+</div>
+<!---SEARCH END----->
+<div id="select_tab">
+    <ul class="nav nav-tabs" style="margin-bottom: -1.5px;">
+        <li class="active"><a href="#tab1" data-toggle="tab">Time Line</a></li>
+        <li><a href="#tab2" data-toggle="tab">Area</a></li>
+    </ul>
+</div>
+<!--TAB START-->
+<div id="myTabContent" class="tab-content" style="padding-top: 50px;border-top: 1px #eee solid;">
+    <!--TAB TIMELINE START-->
+    <div class="tab-pane fade in active" id="tab1">
+        <div class="container">
+            <!--
+              @TODO 並び替え機能
+              <div class="sort">
+                <span class="sort_time"><%= link_to "新着順", controller: "pages", action: "index" %></span>
+                <span class="sort_like"><%= link_to "likeが多い順", controller: "pages", action: "index", order: "like" %></span>
+                <span><%= @test %></span>
+                <span><%= @params %></span>
+              </div>
+            -->
+            <div id="" class="top_shops clearfix grid">
+                <% @shop.each do |shop| %>
+                <figure class="timeline_shops">
+                    <%= link_to shop_path(shop.id) do %>
+                        <%= image_tag(shop.image1_url) %>
+                    <% end %>
+                    <figcaption>
+                        <span class="shop_name"><%= shop.name %></span>
+                        <span class="shop_area"><%= shop.area %></span>
+                        <span class="likes_set">
+                            <% if user_signed_in? %>
+                                <% if current_user.likes.find_by(shop_id: shop.id) %>
+                                    <span class="like_btn">
+                                        <%= render 'shops/unlike', shop: shop %>
+                                    </span>
+                                <% else %>
+                                    <span class="like_btn">
+                                        <%= render 'shops/like', shop: shop %>
+                                    </span>
+                                <% end %>
+                            <% else %>
+                                <span class="like_btn"><%= link_to image_tag("heart365.png"), nologin_path %></span>
+                            <% end %>
+                            <span class="like_nums like_num_<%= shop.id %>">
+                                <%= shop.likes.count %>
+                            </span>
+                        </span>
+                    </figcaption>
+                </figure>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <!--TAB TIMELINE END-->
+    <!--TAB AREA START-->
+    <div class="tab-pane fade" id="tab2">
+        <div class="container">
+            <p class="maincity_title">首都圏</p>
+            <div id="" class="top_shops clearfix grid">
+                <% @repre_area_shops.each_with_index do |repre_area_shop, i| %>
+                <% next unless repre_area_shop %>
+                <figure class="area_shops shopimage_<%= i %>">
+                    <%= image_tag(repre_area_shop.image1_url) %>
+                    <figcaption>
+                        <span class="main_city"><%= link_to repre_area_shop.area, areashops_path(repre_area_shop.area) %></span>
+                    </figcaption>
+                </figure>
+                <% end %>
+            </div>
+            <p class="maincity">都市</p>
+            <div id="" class="top_shops clearfix grid">
+              <!-- @TODO areaクラス立てる -->
+                <ul class="group_area">
+                    <li class="area">大阪</li>
+                    <li class="area">京都</li>
+                    <li class="area">名古屋</li>
+                    <li class="area">札幌</li>
+                    <li class="area">福岡</li>
+                    <li class="area">広島</li>
+                    <li class="area">仙台</li>
+                    <li class="area">神戸</li>
+                    <li class="area">香川</li>
+                    <li class="area">高知</li>
+                    <li class="area">鹿児島</li>
+                    <li class="area">沖縄</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--TAB AREA END-->
+</div>
+<!-- TAB END -->

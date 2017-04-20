@@ -1,0 +1,33 @@
+<div class="page_title">ユーザー一覧</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>UserAvatar</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Destroy</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <% @users.each_with_index do |user, i| %>
+        <tr>
+            <td><%= i+1 %></td>
+            <td class="avatar">
+                <% if user.avatarurl.present? %>
+                    <%= image_tag(user.avatarurl) %>
+                <% else %>
+                    <%= image_tag("account4.png") %>
+                <% end %>
+            </td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td><%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-warning btn-s' %></td>
+            <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-s' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

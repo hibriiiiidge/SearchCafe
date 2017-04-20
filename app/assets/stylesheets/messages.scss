@@ -1,0 +1,34 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.message_shopicon{
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.message_top{
+  margin: auto;
+  width: 30%;
+}
+
+
+.input_message {
+  width: 80%;
+  height: 100px;
+}
+
+#text_area_message {
+  textarea{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 80%;
+  }
+}
+
+.message_shopicon{
+  img{
+    width: 50%;
+  }
+}

@@ -1,0 +1,39 @@
+<div class="page_title">ショップ一覧</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Shopname</th>
+            <th>area</th>
+            <th>address</th>
+            <th>tel</th>
+            <th>image1</th>
+            <th>オーナー名</th>
+            <th>オーナーid</th>
+            <th>edit</th>
+            <th>destroy</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @shop.each_with_index do |shop, i| %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td><%= shop.name %></td>
+                <td><%= shop.area %></td>
+                <td><%= shop.address %></td>
+                <td><%= shop.tel %></td>
+                <td class="shop_thumb_image"><%= image_tag (shop.image1_url) if shop.image1.present? %></td>
+                <td>
+                    <%= shop.owner.last_name %><%= shop.owner.first_name %>
+                </td>
+                <td>
+                    <%= shop.owner_id %>
+                </td>
+                <td><%= link_to 'Edit', edit_admin_shop_path(shop), class: 'btn btn-warning btn-s' %></td>
+                <td><%= link_to 'Destroy', admin_shop_path(shop), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-s' %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+<div class="menuimage menuthumb_<%= stamp %>">
+    <%= fields_for "shop[menuimages_attributes][#{stamp}]" do |ff| %>
+        <%= ff.file_field :image, id: "menufile_#{stamp}", class: "input_file_menu" %>
+        <%= ff.check_box :remove_image, class: "remove_check_menu_#{stamp}", style: "display:none" %>
+    <% end %>
+
+    <label class="hidden_file">
+        <span class="menuimage_<%= stamp %> menuimage_thumb" style="width:128px">
+            <i class="fa fa-picture-o fa-4x"></i>
+            <p>+写真を追加</p>
+        </span>
+        <input type="text" class="input_text_file_menu">
+    </label>
+    <input type="button" value="&#xf1f8;" class="remove_btn_menu_<%= stamp %> trash" name="remove" style="display:none">
+</div>
+<script>
+    //stamp 生成時の時刻
+    selector="#menufile_<%= stamp %>";              //インプットファイル
+    menustamp=".menuimage_<%= stamp %>";            //削除ボタン
+    removestamp=".remove_btn_menu_<%= stamp %>";    //[+写真を追加]アイコン
+    removecheck=".remove_check_menu_<%= stamp %>";  //削除ボタンアイコン
+    image_file=".input_text_file_menu";             //
+    menuthumb=".menuthumb_<%= stamp %>";            //サムネイル全体
+    //[+写真を追加]のイベントトリガー
+    image_event(selector, image_file);
+    //[+写真を追加]のイベント
+    menufile_image_event(selector, menustamp, removestamp, removecheck);
+    //削除ボタンのイベント
+    remove_btn(selector, menustamp, removestamp, removecheck, menuthumb);
+</script>

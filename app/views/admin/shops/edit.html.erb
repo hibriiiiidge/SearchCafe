@@ -1,0 +1,77 @@
+<div class="page_title">登録店舗情報編集</div>
+<%= form_for(@shop, url: admin_shop_path(@shop), html: { method: :put }) do |f| %>
+    <% if @shop.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+            <ul>
+            <% @shop.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+    
+    <div class="container form_container">
+        <form class="form-horizontal">
+            <div class="form-group">
+              <label class="field control-label col-md-offset-2 col-md-2">
+                  <%= f.label :name, "店舗名" %>
+              </label>
+              <div class="col-md-8">
+                  <%= f.text_field :name, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="field control-label col-md-offset-2 col-md-2">
+                  <%= f.label :area, "エリア" %>
+              </label>
+              <div class="col-md-8">
+                  <%= f.text_field :area, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="field control-label col-md-offset-2 col-md-2">
+                  <%= f.label :address, "店舗住所" %>
+              </label>
+              <div class="col-md-8">
+                  <%= f.text_field :address, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="field control-label col-md-offset-2 col-md-2">
+                  <%= f.label :email, "メールアドレス" %>
+              </label>
+              <div class="col-md-8">
+                  <%= f.text_field :email, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="field control-label col-md-offset-2 col-md-2">
+                  <%= f.label :tel, "電話番号" %>
+              </label>
+              <div class="col-md-8">
+                  <%= f.text_field :tel, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="field control-label col-md-offset-2 col-md-2">
+                  <%= f.label :url, "webサイト" %>
+              </label>
+              <div class="col-md-8">
+                  <%= f.text_field :url, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="actions">
+                <%= f.submit "更新", class: 'btn btn-primary btn-s' %>
+            </div>
+        </form>
+    </div>
+<% end %>
+
+<%= link_to 'Back', admin_shops_path %>

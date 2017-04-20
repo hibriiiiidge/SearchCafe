@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="messageroom_container">
+    <div class="tab_list"> <!-- required for floating -->
+        <!-- Nav User/Owner -->
+        <ul class="nav nav-tabs tabs-left" style="height: 300px;">
+          <li class="active"><a href="#user" data-toggle="tab">User</a></li>
+          <% if @current_owner.present? %>
+            <li><a href="#owner" data-toggle="tab">Owner</a></li>
+          <% end %>
+        </ul>
+    </div>
+    <div class="tab_message">
+        <!-- Tab User messageroom/ Owner shops -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="user">
+            <!-- Tab User messageroom -->
+            <div class="message_top">
+              <% if !@messageroom.empty? %>
+                <% @messageroom.each do |messageroom| %>
+                  <div class="message_block">
+                    <div class="message_shopicon">
+                      <%= image_tag(messageroom.shop.image1) %>
+                    </div>
+                    <div class="message_name_detail">
+                      <div class="message_shopname">
+                        <%= messageroom.shop.name %>
+                      </div>
+                      <div class="message_new_message">
+                        <%= cut_text("#{messageroom.messages.last.content}", 3) %>
+                      </div>
+                      <div class="message_detail">
+                        <%= link_to 'メッセージを見る', message_path(messageroom.id) %>
+                        <%= link_to 'Destroy', messageroom_path(messageroom.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-s' %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                メッセージはありません。
+              <% end %>
+            </div>
+          </div>
+          <!-- Tab Owner shops -->
+          <% if @current_owner.present? %>
+            <div class="tab-pane" id="owner">
+              <!-- Tab Owner shops details -->
+              <ul class="nav nav-tabs tabs-left owner_shop_list">
+                <% @current_owner_shops.each_with_index do |shop, i| %>
+                  <li><a href="#shop<%= i+1 %>" data-toggle="tab"><%= shop.name %></a></li>
+                <% end %>
+              </ul>
+              <div class="tab-content shop_messagerooms" style="width: 70%; float: left;">
+                <% @current_owner_shops.each_with_index do |shop, i| %>
+                  <div class="tab-pane" id="shop<%= i+1%>">
+                    <% if shop.messagerooms.empty? %>
+                      メッセージはありません。
+                    <% else %>
+                      <ul>
+                        <% shop.messagerooms.each_with_index do |shop_message| %>
+                          <li class="contact_user_icon">
+                            <%= shop_message.user.username %>
+                            <% if shop_message.user.avatarurl.present? %>
+                              <%= image_tag(shop_message.user.avatarurl) %>
+                            <% else %>
+                              <%= image_tag("account4.png") %>
+                            <% end %>
+                            <%= link_to 'メッセージを見る', message_path(shop_message.id) %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+    </div>
+  </div>
+</div>

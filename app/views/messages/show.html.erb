@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="">
+    <div class="message_shopicon">
+      <%= image_tag(@messageroom.shop.image1) %>
+    </div>
+  </div>
+  <div class="message_top">
+    <%= form_tag({:controller => 'messages', :action => 'create'}, :remote => true, :class => 'message_form') do %>
+      <div class="form-group" style="margin-bottom:0px;">
+        <div id="text_area_message">
+          <% stamp = Time.now.to_i %>
+          <%= text_area_tag :content, nil, class: 'form-control' %>
+        </div>
+      </div>
+      <%= hidden_field_tag :messageroom_id, @messageroom.id %>
+
+      <% if @current_owner.present? && @current_owner.id == @messageroom.shop.owner_id %>
+        <%= hidden_field_tag :shop_id, @messageroom.shop_id %>
+      <% else %>
+        <%= hidden_field_tag :user_id, @messageroom.user_id %>
+      <% end %>
+      <div class="">
+        <%= submit_tag("メッセージ送信", class: 'btn btn-primary btn-md') %>
+      </div>
+    <% end %>
+
+    <div class="message_block">
+      <div id="messages">
+        <%= render partial: "message", locals: {each_message: @messages} %>
+      </div>
+    </div>
+
+  </div>
+</div>

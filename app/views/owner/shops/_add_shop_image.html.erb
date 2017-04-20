@@ -1,0 +1,30 @@
+<div class="shopimage shopthumb_<%= stamp %>">
+    <%= fields_for "shop[shopimages_attributes][#{stamp}]" do |ff| %>
+        <%= ff.file_field :image, id: "shopfile_#{stamp}", class: "input_file" %>
+        <%= ff.check_box :remove_image, class: "remove_check_#{stamp}", style: "display:none" %>
+    <% end %>
+
+    <label class="hidden_file">
+        <span class="shopimage_<%= stamp %> shopimage_thumb" style="width:128px">
+            <i class="fa fa-picture-o fa-4x"></i>
+            <p>+写真を追加</p>
+        </span>
+        <input type="text" class="input_text_file">
+    </label>
+    <input type="button" value="&#xf1f8;" class="remove_btn_<%= stamp %> trash" name="remove" style="display:none">
+</div>
+<script>
+    //stamp 生成時の時刻
+    selector    = "#shopfile_<%= stamp %>";       //インプットファイル
+    removecheck = ".remove_check_<%= stamp %>";   //削除ボタン
+    shopstamp   = ".shopimage_<%= stamp %>";      //[+写真を追加]アイコン
+    removestamp = ".remove_btn_<%= stamp %>";     //削除ボタンアイコン
+    image_file  = ".input_text_file";             //
+    shopthumb   = ".shopthumb_<%= stamp %>";      //サムネイル全体
+    //[+写真を追加]のイベントトリガー
+    image_event(selector, image_file)
+    //[+写真を追加]のイベント
+    shopfile_image_event(selector, shopstamp, removestamp, removecheck);
+    //削除ボタンのイベント
+    remove_btn(selector, shopstamp, removestamp, removecheck, shopthumb);
+</script>

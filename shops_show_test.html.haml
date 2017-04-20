@@ -1,0 +1,78 @@
+.breadcrumbs
+  %ul
+    %li= link_to 'HOME', root_path
+    %li
+    %li= link_to @shop.area, areashops_path(@shop.area)
+    %li
+    %li= @shop.name
+
+.container
+  .detailshop_top.clearfix.grid
+    %figure.detailshop_top
+      = image_tag(@shop.image1_url)
+    .shop_info
+      %ul
+        %li= @shop.name
+        %li= @shop.address
+        %li= @shop.tel
+        %li= @shop.url
+    .shop_like_show
+      .likes_set
+        - if user_signed_in?
+          - if current_user.likes.find_by(shop_id: @shop.id)
+            %span.like_btn
+              = render 'shops/unlike', shop: @shop
+          - else
+            %span.like_btn
+              = render 'shops/like', shop: @shop
+        - else
+          %span.like_btn
+            =link_to image_tag("heart365.png"), nologin_path
+        %span{:class => "like_nums, like_num_#{@shop.id}"}
+          = @shop.likes.count
+
+    = form_for((@messageroom), :html => { method: :post, multipart: true }) do |f|
+      %form
+        .form-group
+          %div{:class => ""}
+            - stamp = Time.now.to_i
+            = fields_for "messageroom[messages_attributes][#{stamp}]" do |ff|
+              = ff.text_area :content, id: "message_#{stamp}", class: "form-control"
+              - if user_signed_in?
+                = ff.hidden_field :user_id, :value => @current_user.id
+          - if user_signed_in?
+            = f.hidden_field :user_id, :value => @current_user.id
+            = f.hidden_field :shop_id, :value => @shop.id
+            .msg_btn
+              = f.submit "メッセージ送信", class: "btn btn-primary btn-md"
+          - else
+            %span.btn.btn-primary.btn-md.nologin.msg_btn
+              = link_to "メッセージ送信", nologin_path
+#select_tab
+  %ul.nav.nav-tabs{:style => "margin-bottom:-1.5px"}
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#tab1"}
+        ATOMS
+    %li
+      %a{"data-toggle" => "tab", :href => "#tab2"}
+        FOOD&DRINK
+
+#myTabContent.tab-count{:style => "padding-top: 50px;border-top: 1px #eee solid;"}
+  #tab1.tab-pane.fade.in.active
+    .container
+      %p{:class => ""}
+        ATOMS
+      .top_shops.clearfix.grid
+        - @shop.shopimages.each do |i|
+          - unless i.image.blank?
+            %figure.shop_atoms
+              = image_tag i.image
+  #tab2.tab-pane.fade
+    .container
+      %p{:class => ""}
+        FOOD&DRINK
+      .top_shops.clearfix.grid#{:id => ""}
+        = @shop.manuimages.each do |i|
+          - unless i.image.blank?
+            %figure.shop_menus
+              = image_tag i.image

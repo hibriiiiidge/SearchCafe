@@ -1,0 +1,5 @@
+<%= link_to image_tag("heart365.png"),
+    like_path(shop.id),
+    :class => "like-#{shop.id} btn-like btn",
+    remote: :true,
+    method: :post %>

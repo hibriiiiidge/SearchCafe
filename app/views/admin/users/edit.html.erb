@@ -1,0 +1,57 @@
+<div class="page_title">登録ユーザー情報編集</div>
+
+<%= form_for(@user, url: admin_user_path(@user), html: { method: :put }) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @use.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container form_container">
+    <form class="form-horizontal">
+      <div class="form-group form_avatar">
+        <label class="field control-label col-md-offset-2 col-md-2">
+          <%= f.label :avatarurl, "プロフィール写真" %>
+        </label>
+        <div class="col-md-8">
+          <%= f.file_field :avatarurl %>
+        </div>
+        <span class="select_image" style="height:100px;width: 100px;margin-right: 200px;">
+          <% if @user.avatarurl.present? %>
+            <%= image_tag(@user.avatarurl) %>
+          <% else %>
+            <%= image_tag("account4.png") %>
+          <% end %>
+        </span>
+      </div>
+      <br>
+      <div class="form-group">
+          <label class="field control-label col-md-offset-2 col-md-2">
+              <%= f.label :username, "アカウント名" %>
+          </label>
+          <div class="col-md-8">
+              <%= f.text_field :username, autofocus: true, class: "form-control" %>
+          </div>
+      </div>
+      <br>
+      <div class="form-group">
+          <label class="field control-label col-md-offset-2 col-md-2">
+              <%= f.label :email, "メールアドレス" %>
+          </label>
+          <div class="col-md-8">
+              <%= f.text_field:email, class: "form-control" %>
+          </div>
+      </div>
+      <div class="actions">
+        <%= f.submit "更新", class: 'btn btn-primary btn-s' %>
+      </div>
+      <%= link_to 'Back', admin_users_path %>
+    </form>
+  </div>
+<% end %>

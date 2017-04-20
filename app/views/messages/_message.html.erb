@@ -1,0 +1,20 @@
+<% each_message.each do |message| %>
+  <div class="message_usericon">
+    <span class="avatar">
+      <% if message.shop_id? %>
+        <%= image_tag(message.shop.owner.user.avatarurl) %>
+      <% else %>
+        <% if message.user.avatarurl.present? %>
+          <%= image_tag(message.user.avatarurl) %>
+        <% else %>
+          <%= image_tag("account4.png") %>
+        <% end %>
+      <% end %>
+
+      <span class="message_content">
+        <%= message.content %>
+      </span>
+
+    </span>
+  </div>
+<% end %>

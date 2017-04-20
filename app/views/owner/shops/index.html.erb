@@ -1,0 +1,34 @@
+<div class="page_title">登録店舗一覧</div>
+<%= @params %>
+<table class="table table-striped">
+    <div style="text-align:right;margin-right:150px;"><%= link_to 'New Shop', new_owner_shop_path, class: 'btn btn-info btn-s' %></div>
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Shop name</th>
+            <th>Shop area</th>
+            <th>Shop address</th>
+            <th>Shop tel</th>
+            <th>Shop url</th>
+            <th>Shop image1</th>
+            <th>Edit</th>
+            <th>Destroy</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @shop.each_with_index do |shop, i| %>
+        <tr>
+            <td><%= i+1 %></td>
+            <td><%= shop.name %></td>
+            <td><%= shop.area %></td>
+            <td><%= shop.address %></td>
+            <td><%= shop.tel %></td>
+            <td><%= shop.url %></td>
+            <td class="shop_thumb_image"><%= image_tag (shop.image1_url) if shop.image1.present? %></td>
+            <td><%= link_to 'Edit', edit_owner_shop_path(shop), class: 'btn btn-warning btn-s' %></td>
+            <td><%= link_to 'Destroy', owner_shop_path(shop), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-s' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,747 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+
+body {
+  padding-top: 50px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav{
+    color: #fff;
+}
+
+/* body */
+
+#top_image{
+  .top_image_inner{
+    img{
+      width: 100%;
+    }
+  }
+}
+
+////////////////////////////////////////////////
+        //video
+////////////////////////////////////////////////
+
+.homepage-hero-module {
+    border-right: none;
+    border-left: none;
+    position: relative;
+}
+.no-video .video-container video,
+.touch .video-container video {
+    display: none;
+}
+.no-video .video-container .poster,
+.touch .video-container .poster {
+    display: block !important;
+}
+.video-container {
+    position: relative;
+    bottom: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+}
+.video-container .poster img {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+.video-container .filter {
+    z-index: 100;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+.video-container video {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+}
+.video-container video.fillWidth {
+    width: 100%;
+}
+
+
+#select_tab{
+  width: 40%;
+  margin: auto;
+  ul {
+    li {
+      width: 50%;
+      text-align: center;
+    }
+  }
+}
+
+.seach{
+  margin: 50px;
+  text-align: center;
+}
+
+#myTabContent{
+  .tab-pane{
+    .container{
+      .sort{
+        text-align: right;
+        margin-right: 50px;
+        margin-bottom: 20px;
+        .sort_time,
+        .sort_like{
+          margin: 10px;
+        }
+      }
+    }
+  }
+}
+
+////////////////////////////////////////////////
+        //container
+////////////////////////////////////////////////
+.grid {
+  .timeline_shops,
+  .area_shops,
+  .shop,
+  .like_shop,
+  .shop_atoms,
+  .shop_menus,
+  .shop_like {
+    float: left;
+    height: 370px;
+    width: 33.33%;
+    margin-bottom: 30px;
+    img {
+      max-width: 350px;
+      height: 92%;
+    }
+    figcaption {
+      padding: 10px;
+    }
+    .area_shop_name,
+    .like_shop_name {
+      text-align: center;
+      margin-right: 40px;
+    }
+    figcaption .shop_area {
+      font-size: 14px;
+    }
+    figcaption .shop_name {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+    .likes_set {
+      line-height: 1em;
+      float: right;
+      color: #ff0000;
+      font-weight: bold;
+      font-size: 25px;
+      margin-right: 30px;
+    }
+  }
+  .shop_like_show {
+    float: left;
+    width: 16%;
+    margin-right: 300px;
+    .likes_set {
+      line-height: 1em;
+      float: right;
+      color: #ff0000;
+      font-weight: bold;
+      font-size: 25px;
+      margin-right: 30px;
+    }
+  }
+  .message_btn{
+    margin-left: 100px;
+    margin-top: 50px;
+  }
+}
+
+.grid {
+  .area_shops {
+  position: relative;
+    figcaption .main_city{
+      position: absolute;
+      top: 0px;
+      position: absolute;
+      top: 125px;
+      left: 110px;
+      font-size: 40px;
+      font-weight: bold;
+      letter-spacing: 0.3em;
+      a {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.breadcrumbs {
+  text-align: left;
+  margin: 50px 50px 30px;
+  height: 20px;
+  li{
+    float: left;
+    margin-right: 10px;
+  }
+}
+
+.maincity_title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
+
+.group_area{
+  margin-left: 30px;
+  .area{
+    float: left;
+    margin-right: 20px;
+  }
+}
+
+.detailshop_top {
+  width: 80%;
+  margin: auto;
+  .detail_shop{
+    float: left;
+    width: 50%;
+    height: 370px;
+    margin-bottom: 30px;
+    img {
+      max-width: 350px;
+      height: 92%;
+    }
+  }
+  .shop_info{
+    width: 50%;
+    float: left;
+    ul{
+      margin: 20px 20px;
+      li{
+        font-size: 14px;
+        line-height: 2em;
+      }
+    }
+  }
+  .new_messageroom {
+    width: 35%;
+    float: left;
+    margin-left: 50px;
+  }
+  .msg_btn {
+    float: right;
+  }
+
+  .nologin a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
+
+
+
+
+////////////////////////////////////////////////
+        //admin, owner
+////////////////////////////////////////////////
+.select_image{
+  float: left;
+  width: 200px;
+  margin: 20px 80px 20px;
+  img {
+    width: 100%;
+  }
+}
+
+.avatar{
+  img{
+    width: 35px;
+  }
+}
+
+.form_container{
+  .form_avatar{
+    margin-bottom: 0;
+    .select_image{
+      margin-left: 20px;
+      img{
+        height: 100px;
+      }
+    }
+  }
+}
+
+.infowin_img img{
+  width: 100px;
+}
+
+////////////////////////////////////////////////
+        //login, sign_up
+////////////////////////////////////////////////
+
+#signup_container,
+#login_container,
+#newshop_container,
+#owner_regist_container {
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+  .signup_title,
+  .login_title,
+  .newshop_title,
+  .owner_regist_title {
+    font-size: 20px;
+    font-weight: bold;
+    width: 200px;
+  }
+  .signup_form,
+  .login_form,
+  .newshop_form{
+    width: 50%;
+      .form-control{
+        width: 100%;
+      }
+      #signup_action,
+      #login_action {
+        text-align: center;
+        margin-top: 20px;
+      }
+  }
+
+  .links{
+    float: left;
+    width: 50%;
+  }
+
+  #already_regist{
+    font-size: 12px;
+    margin-left: 20px;
+  }
+
+  #login_twitter,
+  #login_facebook{
+    margin: 40px;
+    margin-top: 2px;
+    img{
+      width: 200px;
+    }
+  }
+}
+
+////////////////////////////////////////////////
+        //owner_regist
+////////////////////////////////////////////////
+
+#owner_regist_container {
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+  .owner_regist_title {
+    font-size: 20px;
+    font-weight: bold;
+    width: 200px;
+  }
+  .owner_regist_form {
+    width: 80%;
+    #name_group {
+      .last_name,
+      .first_name {
+       .last_name_label,
+       .first_name_label {
+          width: 10%;
+          float: left;
+          line-height: 2em;
+          padding-left: 15px;
+       }
+       .last_name_text,
+       .first_name_text {
+         width: 25%;
+         float: left;
+       }
+      }
+    }
+    .form_company_address,
+    .form_company_name,
+    .form_repre_name,
+    .form_company_tel {
+      margin-bottom: 10px;
+      width: 100%;
+      height: 35px;
+      .field {
+        float: left;
+        margin-bottom: 0px;
+        width: 30%;
+        line-height: 2em;
+        text-align: center;
+      }
+      #postal_mark {
+        float: left;
+        line-height: 2.5em;
+      }
+
+      .input_companypostal_code {
+        float: left;
+        width: 30%;
+        margin-left: 10px;
+        margin-right: 30px;
+      }
+
+      .input_companyaddress {
+        float: right;
+        width: 70%;
+        .form-control {
+          width: 100%;
+        }
+      }
+      .input_company_name,
+      .input_company_tel{
+        float: left;
+        width: 70%;
+          .form-control {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .company_action {
+      text-align: center;
+    }
+}
+
+
+
+////////////////////////////////////////////////
+        //newshop
+////////////////////////////////////////////////
+#newshop_container {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+  .newshop_title {
+    font-size: 20px;
+    font-weight: bold;
+    width: 200px;
+  }
+  .newshop_form {
+    width: 80%;
+      .form-group {
+        margin-bottom: 10px;
+        width: 100%;
+        height: 35px;
+        .field {
+          float: left;
+          margin-bottom: 0px;
+          width: 30%;
+          line-height: 2em;
+          text-align: center;
+        }
+        .input_shoparea{
+          float: left;
+          width: 30%;
+          .form-control {
+            width: 70%;
+          }
+        }
+        #postal_mark {
+          float: left;
+          line-height: 2.5em;
+        }
+
+        .input_shoppostal_code {
+          float: left;
+          width: 12%;
+          margin-left: 10px;
+          margin-right: 30px;
+        }
+
+        .input_shopaddress {
+          width: 50%;
+          float: right;
+          width: 50%;
+          margin-right: 122px;
+          .form-control {
+            width: 70%;
+          }
+        }
+
+        .input_shopname,
+        .input_shopemail,
+        .input_shoptel,
+        .input_shopweb {
+          float: left;
+          width: 50%;
+            .form-control {
+            width: 70%;
+          }
+        }
+        .shopimages,
+        .menuimages {
+          width: 70%;
+          float: left;
+          .shopimage,
+          .menuimage {
+            width: 33%;
+            float: left;
+            .input_file,
+            .input_file_menu {
+              display: none;
+            }
+            .hidden_file {
+              float: left;
+              .shopimage_thumb,
+              .menuimage_thumb {
+                border: 1px solid;
+                img{
+                  width: 128px;
+                }
+                i {
+                  position: relative;
+                  top: 30px;
+                  left: 34px;
+                }
+                p {
+                  position: relative;
+                  top: 30px;
+                  left: 20px;
+                }
+              }
+              span {
+                display: block;
+                height: 128px;
+                width: 128px;
+                cursor: pointer;
+              }
+              .input_text_file,
+              .input_text_file_menu {
+                display: none;
+              }
+            }
+            .trash{
+              position: relative;
+              left: -26px;
+            }
+          }
+        }
+      }
+
+      #newshop_action {
+        text-align: center;
+        margin-top: 150px;
+      }
+
+      .form_address{
+        margin-bottom: 10px;
+        width: 100%;
+        height: 100px;
+        .field {
+          float: left;
+          margin-bottom: 0px;
+          width: 30%;
+          line-height: 2em;
+          text-align: center;
+        }
+        #postal_mark {
+          float: left;
+          line-height: 2.5em;
+        }
+
+        .input_shoppostal_code {
+          float: left;
+          width: 12%;
+          margin-left: 10px;
+          margin-right: 30px;
+        }
+
+        .input_shopaddress {
+          width: 50%;
+          float: right;
+          width: 50%;
+          margin-right: 122px;
+          .form-control {
+            width: 70%;
+          }
+        }
+      }
+  }
+}
+
+
+////////////////////////////////////////////////
+        //input_image
+////////////////////////////////////////////////
+
+input[type=button]{
+  font-family: FontAwesome /*FontAwesomeをフォント指定*/;
+}
+
+////////////////////////////////////////////////
+        //user_edit
+////////////////////////////////////////////////
+#user_edit_container {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+  .user_edit_title {
+    font-size: 20px;
+    font-weight: bold;
+    width: 200px;
+  }
+  .edit_user_form {
+    width: 80%;
+    margin: auto;
+    .form-group {
+      margin-bottom: 10px;
+      width: 100%;
+      height: 35px;
+      .field {
+        float: left;
+        margin-bottom: 0px;
+        width: 30%;
+        line-height: 2em;
+        text-align: center;
+      }
+      .input_account,
+      .input_email,
+      .input_pass,
+      .input_pass_conf {
+        float: left;
+        width: 50%;
+        .form-control {
+          width: 70%;
+        }
+      }
+    }
+    .form_avatar{
+      height: 250px;
+    }
+    .edit_user_action{
+      text-align: center;
+    }
+  }
+}
+
+////////////////////////////////////////////////
+        //messages_room
+////////////////////////////////////////////////
+.messageroom_container {
+  width: 70%;
+  margin: auto;
+  margin-top: 50px;
+  .tab_list {
+    width: 20%;
+    float: left;
+  }
+  .tab_message {
+    width: 80%;
+    float: left;
+    .message_top {
+      margin-top: 20px;
+      margin-left: 50px;
+      .message_block {
+        height: 100px;
+        margin-top: 15px;
+        .message_shopicon {
+          clear: both;
+          width: 60%;
+          float: left;
+        }
+        .message_usericon {
+          clear: both;
+          float: left;
+        }
+        .message_shopicon img ,
+        .message_usericon img {
+          width: 100px;
+        }
+        .message_name_detail {
+          .message_shopname {
+
+          }
+          .message_detail {
+
+          }
+        }
+      }
+    }
+
+    .owner_shop_list {
+      width: 30%;
+      float: left;
+    }
+    .shop_messagerooms {
+      width: 70%;
+      float: left;
+      .contact_user_icon img{
+        width: 20%;
+      }
+    }
+  }
+}

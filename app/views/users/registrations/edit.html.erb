@@ -1,0 +1,86 @@
+<div class="container">
+    <div id="user_edit_container">
+      <div class="user_edit_title">ユーザー情報編集</div>
+      <%= form_for(@user, as: resource_name, url: registration_path(@user), html: { method: :put }) do |f| %>
+        <%= devise_error_messages! %>
+        
+        <div class="edit_user_form">
+          <form>
+            <div class="form-group form_avatar">
+              <label class="field">
+                <%= f.label :avatarurl, "プロフィール写真" %>
+              </label>
+              <div class="">
+                <%= f.file_field :avatarurl ,class: "form_image"%>
+              </div>
+              <span class="select_image">
+                <% if current_user.avatarurl.present? %>
+                  <%= image_tag(current_user.avatarurl) %>
+                <% else %>
+                  <%= image_tag("account4.png") %>
+                <% end %>
+              </span>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="field">
+                <%= f.label :username, "アカウント名" %>
+              </label>
+              <div class="input_account">
+                <%= f.text_field :username, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="field">
+                <%= f.label :email, "メールアドレス" %>
+              </label>
+              <div class="input_email">
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+            <div class="form-group">
+              <label class="field">
+                <%= f.label :password, "パスワード" %>
+              </label>
+              <div class="input_pass">
+                <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="field">
+                <%= f.label :password_confirmation, "パスワード(確認)" %>
+              </label>
+              <div class="input_pass_conf">
+                <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+              </div>
+            </div>
+            <i class="" style="margin-left: 80px;">(パスワードを変更しない場合は空白のままで結構です。)</i>
+            <br>
+            <div class="edit_user_action">
+              <%= f.submit "更新", class: 'btn btn-primary btn-s' %>
+            </div>
+          </form>
+        </div>
+      
+        <!--<div class="field">-->
+        <!--  <%#= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />-->
+        <!--  <%#= f.password_field :current_password, autocomplete: "off" %>-->
+        <!--</div>-->
+      <% end %>
+  </div>
+</div>
+
+<!--<div class="page_title">ユーザー情報の削除</div>-->
+<!--  <div style="text-align:center;margin:30px;"><%#= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger btn-m' %></div>-->
+<!--</div>-->
+<%#= link_to "Back", :back %>
+<script>
+  selector=".form_image";
+  form_image_event(selector);
+</script>

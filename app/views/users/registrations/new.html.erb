@@ -1,0 +1,65 @@
+<div class="container">
+    <div id="signup_container">
+      <div class="signup_title">新規登録</div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="signup_form" style="float:left;">
+          <form>
+            <div class="form-group" style="margin-bottom:0px;">
+              <label class="field" style="margin-bottom:0px;">
+                <%= f.label :username, "アカウント名" %>
+              </label>
+              <div class="">
+                <%= f.text_field :username, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-group" style="margin-bottom:0px;">
+              <label class="field" style="margin-bottom:0px;">
+                <%= f.label :email, "メールアドレス" %>
+              </label>
+              <div class="">
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+            </div>
+            
+            <div class="form-group" style="margin-bottom:0px;">
+              <label class="field" style="margin-bottom:0px;">
+                <%= f.label :password, "パスワード" %>
+              </label>
+              <div class="">
+                <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+              </div>
+            </div>
+            <div class="">
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %>文字以上)</em>
+              <% end %>
+            </div>
+            
+            <div class="form-group" style="margin-bottom:0px;">
+              <label class="field" style="margin-bottom:0px;">
+                <%= f.label :password_confirmation, "パスワード(確認)" %>
+              </label>
+              <div class="">
+                <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+              </div>
+            </div>
+            
+            <div id="signup_action">
+              <%= f.submit "新規登録", class: 'btn btn-primary btn-s' %>
+            </div>
+          </form>
+        </div>
+        <% if @noadmin %>
+          <div>
+            <%= f.label :admin %><br>
+            <%= f.check_box :admin, { }, true, false %>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="links">
+        <%= render "users/shared/links" %>
+      </div>
+    </div>
+</div>

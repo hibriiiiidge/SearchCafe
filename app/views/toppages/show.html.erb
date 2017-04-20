@@ -1,0 +1,22 @@
+<div class="breadcrumbs">
+    <ul>
+        <li><%= link_to 'HOME', root_path %></li>
+        <li>></li>
+        <li>ユーザーページ</li>
+    </ul>
+</div>
+
+<div class="profile_top container clearfix grid">
+    <% if @shops.present? %>
+        <% @shops.each do |like_shop| %>
+            <figure class="like_shop">
+                <%= link_to (image_tag (like_shop.image1_url)), shop_path(like_shop.id) %>
+                <figcaption class="like_shop_name">
+                    <span class="shop_name"><%= like_shop.name %></span>
+                </figcaption>
+            </figure>
+        <% end %>
+    <% else %>
+        お気に入りの登録はありません。
+    <% end %>
+</div>

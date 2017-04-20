@@ -1,0 +1,63 @@
+#home
+  / TOP IMAGE START
+  #top_image{"data-ride" => ""}
+    .top_image_inner
+      = image_tag("back3.jpg")
+.search
+  = form_tag root_path, method: :get do
+    = text_field_tag :q, params[:q], placeholder: "キーワードを入力", required: true, :size => '70'
+    = submit_tag "SEARCH", name: nil, class: "btn", data: {disable_with: "検索中..."}
+
+#select_tab
+  %ul.nav.nav-tabs{:style => "margin-bottom: -1.5px"}
+    %li.active
+      %a{:href => "#tab1", "data-toggle" => "tab"}
+        Time Line
+    %li
+      %a{:href => "#tab2", "data-toggle" => "tab"}
+        Area
+#myTabContent.tab-content{:style => "padding-top:50px;border-top: 1px #eee solid;"}
+  #tab1.tab-pane.fade.in.active
+    .container
+      /@TODO
+        comment out
+      .top_shops.clearfix.grid{:id => ""}
+        - @shop.each do |shop|
+          %figure.timeline_shops
+            = link_to shop_path(shop.id) do
+              = image_tag(shop.image1_url)
+            %figcaption
+              %span.shop_name
+                = shop.name
+              %span.shop_area
+                = shop.area
+              %span.likes_set
+                - if user_signed_in?
+                  - if current_user.likes.find_by(shop_id: shop.id)
+                    %span.like_btn
+                      = render 'shops/unlike', shop: shop
+                  - else
+                    %span.like_btn
+                      = render 'shops/like', shop: shop
+                - else
+                  %span.like_btn
+                    = link_to image_tag("heart365.png"), nologin_path
+                %span{:class => "likes_nums like_num_#{shop.id}"}
+                  = shop.likes.count
+  #tab2.tab-pane
+    .container
+      %p.maincity_title
+        首都圏
+      .top_shops.clearfix.grid{:id => ""}
+        - @repre_area_shops.each_with_index do |repre_area_shop, i|
+          - next unless repre_area_shop
+            %figure{:class => "area_shops shopimage_#{i}"}
+              = image_tag(repre_area_shop.image1_url)
+                %figcaption
+                  %span.main_city
+                    = link_to repre_area_shop.area, areashops_path(repre_area_shop.area)
+      %p.maincity
+        都市
+      .top_shops.clearfix.grid{:id=>""}
+        %ul.group_area
+          %li.area 大阪

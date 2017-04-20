@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SearchCafe</title>
+  <%= include_gon %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVGM4lSwTgROn1EGtLV1zHcxMTBYfjgM4" type="text/javascript"></script>
+  <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://raw.githubusercontent.com/dbtek/bootstrap-vertical-tabs/master/bootstrap.vertical-tabs.css">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <!--- header START --->
+  <div class="navbar-wrapper">
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="top-nav">
+        <div class="container">
+          <div class="navbar-header">
+            <!--- logo START --->
+            <span style="margin-top: 10px;margin-right: 10px;float: left;"><%= image_tag("knife22.png")%></span>
+            <%= link_to "SEARCH CAFE", root_path, id: 'logo' %>
+            <!--- logo END --->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </div>
+          <!--- nav START --->
+          <div class="navbar-collapse collapse" style="height: 1px;">
+            <ul class="nav navbar-nav navbar-right scroll">
+              <% if !user_signed_in? %>
+                <li><%= link_to 'オーナー登録', new_user_registration_path %></li>
+              <% elsif !@current_owner.present? %>
+                <li><%= link_to 'オーナー登録', new_owner_user_path %></li>
+              <% end %>
+              <% if @current_owner.present? %>
+                <li><%= link_to '新規店舗登録', new_owner_shop_path %></li>
+              <% end %>
+
+              <li><%= link_to 'HOME'%></li>
+              <li><%= link_to 'ABOUT'%></li>
+              <% if user_signed_in? %>
+                <li><%= link_to 'MESSAGE', messagerooms_path %></li>
+              <% end %>
+              <% unless user_signed_in? %>
+                <li><%= link_to '新規登録', new_user_registration_path %></li>
+                <li><%= link_to 'ログイン', new_user_session_path %></li>
+              <% else %>
+                <li class="dropdown" style="height: 50px">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="margin-top:-8px">
+                    <span class="">
+                      <span>
+                        <%= current_user.username %>
+                      </span>
+                      <span class="avatar">
+                        <% if current_user.avatarurl.present? %>
+                          <%= image_tag(current_user.avatarurl) %>
+                        <% else %>
+                          <%= image_tag("account4.png") %>
+                        <% end %>
+                      </span>
+                    </span>
+                    <span class="caret"></span>
+                  </a>
+
+                  <ul class="dropdown-menu">
+                    <% if current_user.role == "admin" %>
+                      <li><%= link_to 'ユーザー一覧(管理者用)', admin_users_path %></li>
+                      <li><%= link_to 'オーナー一覧(管理者用)',admin_owners_path %></li>
+                      <li><%= link_to 'ショップ一覧(管理者用)', admin_shops_path %></li>
+                    <% else %>
+                      <li><%= link_to "ユーザーページ", toppages_show_path %></li>
+                    <% end %>
+                    <% if @current_owner.present? %>
+                      <li><%= link_to 'オーナープロフィール編集', edit_owner_user_path(@current_owner.id) %></li>
+                      <li><%= link_to '新規店舗登録', owner_shops_path %></li>
+                    <% end %>
+                    <li><%= link_to 'プロフィール編集', edit_user_registration_path %></li>
+                    <li role="separator" class="divider"></li>
+                    <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                  </ul>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <!--- nav END --->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--- header END --->
+  <% if notice %>
+    <p class="alert alert-info alert-dismissible" role="alert" style="margin:0px">
+      <button type="button" class="close" data-dismiss="alert" aria-label="閉じる"><span aria-hidden="true">×</span></button>
+      <%= notice %>
+    </p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger alert-dismissible" role="alert" style="margin:0px">
+      <button type="button" class="close" data-dismiss="alert" aria-label="閉じる"><span aria-hidden="true">×</span></button>
+      <%= alert %>
+    </p>
+  <% end %>
+  <%= yield %>
+  <footer>
+    <p style="color:#ffffff;background-color:#222;margin:30px 0 0;height:500px;text-align:center;line-height: 10em;">Copyright (C) search cafe</p>
+  </footer>
+</body>
+</html>

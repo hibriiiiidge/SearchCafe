@@ -1,0 +1,97 @@
+<div class="container">
+    <div id="owner_regist_container">
+        <div class="owner_regist_title">オーナー登録</div>
+        <%= form_for(@owner, url: owner_users_path(@owner), html: { method: :post }) do |f| %>
+            <% if @owner.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@owner.errors.count, "error") %> prohibited this owner from being saved:</h2>
+                    <ul>
+                    <% @owner.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                </div>
+            <% end %>
+              
+            <div class="owner_regist_form" style="float:left;">
+                <form>
+                    <div class="form_repre_name">
+                        <label class="field last_name_label">
+                            代表者氏名
+                        </label>
+                        <div id="name_group">
+                            <div class="form-group last_name">
+                                <label class="field last_name_label">
+                                    <%= f.label :last_name, "性" %>
+                                </label>
+                                <div class="last_name_text">
+                                    <%= f.text_field :last_name, autofocus: true, class: "form-control", placeholder: "高橋" %>
+                                </div>
+                            </div>
+                            <div class="form-group first_name">
+                                <label class="field first_name_label">
+                                    <%= f.label :first_name, "名" %>
+                                </label>
+                                <div class="first_name_text">
+                                    <%= f.text_field :first_name, class: "form-control", placeholder: "康哲" %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group form_company_name" style="clear:both">
+                        <label class="field">
+                            <%= f.label :company_name, "会社名（屋号）" %>
+                        </label>
+                        <div class="input_company_name">
+                            <%= f.text_field :company_name, class: "form-control", placeholder: "株式会社ジーズ" %>
+                        </div>
+                    </div>
+                    <br>
+                    <!--<div class="form-group">-->
+                    <!--    <label class="field">-->
+                    <!--        <%#= f.label :company_address, "住所" %>-->
+                    <!--    </label>-->
+                    <!--    <div class="">-->
+                    <!--        <%#= f.text_field :company_address, class: "form-control" %>-->
+                    <!--    </div>-->
+                    <!--</div>-->
+                    <div class="form-group form_company_address" style="height: 80px;">
+                        <label class="field">
+                            <%= f.label :company_address, "住所" %>
+                        </label>
+                        <span id="postal_mark">
+                            〒
+                        </span>
+                        <div class="input_companypostal_code">
+                            <%= f.text_field :postal_code1, class: "form-control", placeholder: "1234567" %>
+                        </div>
+                        <div class="search_postal">
+                            <button type="button" class="btn btn-success">住所検索</button>
+                        </div>
+                        <br>
+                        <div class="input_companyaddress">
+                            <%= f.text_field :company_address, class: "form-control", placeholder: "東京都千代田区永田町..." %>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group form_company_tel"  style="clear:both">
+                        <label class="field">
+                            <%= f.label :company_tel, "電話番号" %>
+                        </label>
+                        <div class="input_company_tel">
+                            <%= f.text_field :company_tel, class: "form-control", placeholder: "0312345678" %>
+                        </div>
+                    </div>
+                    <br>
+                    <%= f.hidden_field :user_id, :value => @owner.user_id %>
+                    <div class="company_action">
+                        <%= f.submit "登録", class: 'btn btn-primary btn-s' %>
+                    </div>
+                </form>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<%#= link_to 'Back', root_path %>
