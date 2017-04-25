@@ -4,7 +4,6 @@ class ShopsController < ApplicationController
     def index
         @area = params[:area]
         @shops = Shop.where(:area => @area)
-        #binding.pry
     end
 
     def show
@@ -12,7 +11,6 @@ class ShopsController < ApplicationController
         @message = Message.new
         @messageroom = Messageroom.new
         @messageroom.messages.build
-        #binding.pry
     end
 
     private
