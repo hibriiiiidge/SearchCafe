@@ -19,7 +19,24 @@ development:
 test:
   <<: *default
   database: db/test.sqlite3
+  #database: db/test.
+
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  #database: db/production.sqlite3
+  adapter: mysql2
+  database: db_test
+  host: db-test.cukrunj2mbxk.ap-northeast-1.rds.amazonaws.com
+  username: test_user
+  password: password
+  encoding: utf8
+
+
+  # development:
+  # adapter: mysql2
+  # database: hoge
+  # host: localhost
+  # username: root
+  # password: xxxxxx
+  # encoding: utf8
