@@ -1,14 +1,17 @@
+##管理者のオーナー関連のコントローラー
 class Admin::OwnersController < AdminController
     before_action :set_owner, only: [:edit, :update, :destroy]
 
+    ##編集
+    #一覧表示
     def index
         @owners = Owner.all
         @current_owner = Owner.find_by(user_id: current_user )
     end
-    
+
     def edit
     end
-    
+    #アップデート
     def update
         respond_to do |format|
           if @owner.update(owner_params)
@@ -20,7 +23,7 @@ class Admin::OwnersController < AdminController
           end
         end
     end
-    
+    #消去
     def destroy
         @owner.destroy
         respond_to do |format|
@@ -28,14 +31,20 @@ class Admin::OwnersController < AdminController
             format.json { head :no_content }
         end
     end
-    
+
     private
+    #params id オーナーid
     def set_owner
         @owner = Owner.find(params[:id])
     end
-    
+
+    #params last_name       名前
+    #params first_name      氏名
+    #params company_name    会社名
+    #params company_address 会社住所
+    #params company_tel     会社連絡先
     def owner_params
         params.require(:owner).permit(:last_name, :first_name, :company_name, :company_address, :company_tel)
     end
-    
+
 end
