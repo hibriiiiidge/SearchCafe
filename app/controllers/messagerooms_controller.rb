@@ -39,9 +39,13 @@ class MessageroomsController < ApplicationController
     @messageroom = Messageroom.find(params[:id])
   end
 
+  #params user_id
+  #params shop_id
+  #params messageroom_id
+  #params content
+  #user_id
   def messageroom_params
     params.require(:messageroom).permit(:user_id, :shop_id, messages_attributes: [:messageroom_id, :content, :user_id])
-    #params.require(:messageroom).permit(:user_id, :shop_id)
   end
 
 end

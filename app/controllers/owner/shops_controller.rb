@@ -3,7 +3,9 @@ class Owner::ShopsController < ApplicationController
 
     def index
         @current_owner = Owner.find_by(user_id: current_user )
+        #現在のオーナーの保有するショップ一覧を取得
         @shop = Shop.where(owner_id: @current_owner.id )
+        #@TODO 並び替え Likeカウントの順番
         #@have_ranking=Have.group(:item_id).limit(10).order('count_item_id DESC').count('item_id')
     end
 
@@ -17,7 +19,6 @@ class Owner::ShopsController < ApplicationController
 
     def create
         @shop = Shop.new(shop_params)
-
         respond_to do |format|
             if @shop.save
                 format.html { redirect_to owner_shops_path, notice: 'Shop was successfully created.' }
@@ -55,6 +56,16 @@ class Owner::ShopsController < ApplicationController
         @shop = Shop.find(params[:id])
     end
 
+    #params name          ショップ名
+    #params area          所属エリア
+    #params postal_code1  郵便番号1 ex)110
+    #params postal_code2  郵便番号2 ex)0083
+    #params address       住所
+    #params email         メール
+    #tel                  電話
+    #url                  url
+    #image1               メインイメージ
+    #owner_id             オーナーid
     def shop_params
       params.require(:shop).permit(:name, :area, :postal_code1, :postal_code2, :address, :email, :tel, :url, :image1, :owner_id, shopimages_attributes: [:shop_id, :image, :remove_image], menuimages_attributes: [:shop_id, :image, :remove_image])
     end

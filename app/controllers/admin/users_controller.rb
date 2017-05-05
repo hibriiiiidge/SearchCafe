@@ -5,10 +5,10 @@ class Admin::UsersController < AdminController
         @users = User.all
         @current_owner = Owner.find_by(user_id: current_user )
     end
-    
+
     def edit
     end
-    
+
     def update
         respond_to do |format|
           if @user.update(user_params)
@@ -20,7 +20,7 @@ class Admin::UsersController < AdminController
           end
         end
     end
-    
+
     def destroy
         if @user.admin?
             respond_to do |format|
@@ -34,14 +34,18 @@ class Admin::UsersController < AdminController
             end
         end
     end
-    
+
     private
     def set_user
         @user = User.find(params[:id])
     end
-    
+
+    #params username    ユーザ名
+    #params email       メール
+    #params avatarurl   アバター
+    #params password    パスワード@TODO     
     def user_params
         params.require(:user).permit(:username, :email, :avatarurl)# :password
     end
-    
+
 end

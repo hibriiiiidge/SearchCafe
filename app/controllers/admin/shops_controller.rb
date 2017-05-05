@@ -1,21 +1,20 @@
 class Admin::ShopsController < AdminController
     before_action :set_shop, only: [:edit, :update, :destroy]
-    
+
     def index
         @shop = Shop.includes(:owner).all
         @current_owner = Owner.find_by(user_id: current_user )
     end
-    
+
     def new
         @shop = Shop.new
     end
-    
+
     def edit
     end
-    
+
     def create
         @shop = Shop.new(shop_params)
-    
         respond_to do |format|
             if @shop.save
                 format.html { redirect_to admin_shops_path, notice: 'Shop was successfully created.' }
@@ -26,7 +25,7 @@ class Admin::ShopsController < AdminController
             end
         end
     end
-    
+
     def update
         respond_to do |format|
           if @shop.update(shop_params)
@@ -38,7 +37,7 @@ class Admin::ShopsController < AdminController
           end
         end
     end
-    
+
     def destroy
         @shop.destroy
         respond_to do |format|
@@ -46,14 +45,21 @@ class Admin::ShopsController < AdminController
           format.json { head :no_content }
         end
     end
-    
-    
+
+
     private
-    
+
     def set_shop
         @shop = Shop.find(params[:id])
     end
-    
+
+    #params name      名前
+    #params area      所属エリア
+    #params address   住所
+    #params email     メール
+    #params tel       電話
+    #params url       url
+    #params image1    メインイメージ
     def shop_params
       params.require(:shop).permit(:name, :area, :address, :email, :tel, :url, :image1)
     end

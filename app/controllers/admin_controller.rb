@@ -1,9 +1,10 @@
 class AdminController < ApplicationController
     before_action :user_admin?
+    #管理者かどうかの判定
     def user_admin?
-        #redirect_to '/' unless current_user.admin?
+        #adminでなければredirectする処理
         unless current_user.role == "admin"
-            redirect_to '/' 
+            redirect_to '/'
         end
     end
 end
