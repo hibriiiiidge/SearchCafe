@@ -1,19 +1,12 @@
 class MessagesController < ApplicationController
 
   def show
+    #ユーザidからオーナー情報を取得
     @current_owner = Owner.find_by(user_id: current_user)
+    #パラメータidからメッセージ箱を取得
     @messageroom = Messageroom.find(params[:id])
+    #メッセージ箱のidからメッセージ一覧を取得
     @messages = Message.where(messageroom_id: @messageroom)
-    # @test = []
-    # @test2 = []
-    # @messages.each do |message|
-    #   if message.shop_id?
-    #     @test << message.shop
-    #   else
-    #     @test2 << message.user
-    #   end
-    # end
-    #binding.pry
   end
 
   def create
@@ -35,6 +28,10 @@ class MessagesController < ApplicationController
 
   private
 
+  #params integer  メッセージ箱
+  #params string  メッセージ内容
+  #params integer ユーザーid
+  #params integer ショップid
   def message_params
     params.permit(:messageroom_id, :content, :user_id, :shop_id)
   end

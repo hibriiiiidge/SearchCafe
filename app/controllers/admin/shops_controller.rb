@@ -53,13 +53,13 @@ class Admin::ShopsController < AdminController
         @shop = Shop.find(params[:id])
     end
 
-    #params name      名前
-    #params area      所属エリア
-    #params address   住所
-    #params email     メール
-    #params tel       電話
-    #params url       url
-    #params image1    メインイメージ
+    #params name      string  名前
+    #params area      string  所属エリア
+    #params address   string  住所
+    #params email     string  メール
+    #params tel       integer 電話
+    #params url       string  url
+    #params image1    string  メインイメージ
     def shop_params
       params.require(:shop).permit(:name, :area, :address, :email, :tel, :url, :image1)
     end

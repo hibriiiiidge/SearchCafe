@@ -2,8 +2,11 @@ class MessageroomsController < ApplicationController
   before_action :set_messageroom, only: [:destroy]
 
   def index
+    #ユーザーidからオーナー情報を取得
     @current_owner = Owner.find_by(user_id: current_user)
+    #オーナーidから保有するショップを取得
     @current_owner_shops = Shop.where(owner_id: @current_owner)
+    #ユーザーidからメッセージ箱を取得
     @messageroom = Messageroom.where(user_id: current_user.id)
     #@current_owner_shops_messageroom = Messageroom.where(shop_id: @current_owner_shops)
     #binding.pry
@@ -39,11 +42,11 @@ class MessageroomsController < ApplicationController
     @messageroom = Messageroom.find(params[:id])
   end
 
-  #params user_id
-  #params shop_id
-  #params messageroom_id
-  #params content
-  #user_id
+  #params   integer user_id
+  #params   integer shop_id
+  #params   integer messageroom_id
+  #params   string  content
+  #params   integer user_id 
   def messageroom_params
     params.require(:messageroom).permit(:user_id, :shop_id, messages_attributes: [:messageroom_id, :content, :user_id])
   end

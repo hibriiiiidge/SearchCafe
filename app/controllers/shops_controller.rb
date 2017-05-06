@@ -3,6 +3,7 @@ class ShopsController < ApplicationController
 
     def index
         @area = params[:area]
+        #エリアに該当するショップ一覧を取得
         @shops = Shop.where(:area => @area)
     end
 

@@ -40,11 +40,11 @@ class Owner::UsersController < ApplicationController
         @owner = Owner.find(params[:id])
     end
 
-    #params user_id     ユーザid
-    #params username    ユーザ名
-    #params email       メール
-    #params avatarurl   アバター
-    #params password    パスワード@TODO
+    #params user_id     integer ユーザid
+    #params username    string  ユーザ名
+    #params email       string  メール
+    #params avatarurl   string  アバター
+    #params password    string  パスワード@TODO
     def owner_params
         params.require(:owner).permit(:user_id, :last_name, :first_name, :company_name, :company_address, :company_tel)# :password
     end

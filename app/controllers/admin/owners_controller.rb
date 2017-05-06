@@ -38,11 +38,11 @@ class Admin::OwnersController < AdminController
         @owner = Owner.find(params[:id])
     end
 
-    #params last_name       名前
-    #params first_name      氏名
-    #params company_name    会社名
-    #params company_address 会社住所
-    #params company_tel     会社連絡先
+    #params last_name       string  名前
+    #params first_name      string  氏名
+    #params company_name    string  会社名
+    #params company_address string  会社住所
+    #params company_tel     integer 会社連絡先
     def owner_params
         params.require(:owner).permit(:last_name, :first_name, :company_name, :company_address, :company_tel)
     end

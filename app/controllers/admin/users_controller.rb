@@ -40,10 +40,10 @@ class Admin::UsersController < AdminController
         @user = User.find(params[:id])
     end
 
-    #params username    ユーザ名
-    #params email       メール
-    #params avatarurl   アバター
-    #params password    パスワード@TODO     
+    #params username    string  ユーザ名
+    #params email       string  メール
+    #params avatarurl   string  アバター
+    #params password    strign  パスワード@TODO
     def user_params
         params.require(:user).permit(:username, :email, :avatarurl)# :password
     end

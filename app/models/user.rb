@@ -1,10 +1,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-    devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-        #  :confirmable, :lockable,
-        :timeoutable, :omniauthable
+    devise  :database_authenticatable, :registerable,
+            :recoverable, :rememberable, :trackable, :validatable,
+            :timeoutable, :omniauthable
 
     has_many :likes, dependent: :destroy
     has_one :owner, dependent: :destroy
@@ -18,13 +17,14 @@ class User < ActiveRecord::Base
     #usernameの文字数制限
     validates :username, presence: true, length: { maximum: 50 }
 
+    #findして無かったらcreate
     def self.find_or_create_from_oauth(auth)
       User.find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
-        user.provider = auth["provider"]
-        user.uid = auth["uid"]
-        user.username = auth["info"]["nickname"] || auth["info"]["name"]
-        user.avatarurl = auth["info"]["image"]
-        user.email      = User.dummy_email(auth)
+        user.provider   = auth["provider"]
+        user.uid        = auth["uid"]
+        user.username   = auth["info"]["nickname"] || auth["info"]["name"]
+        user.avatarurl  = auth["info"]["image"]
+        user.email      = User.dummy_email(auth)  #@TODO ダミーメール生成
         user.password   = Devise.friendly_token[0, 20]
       end
     end
@@ -40,9 +40,11 @@ class User < ActiveRecord::Base
         end
     end
 
+    #管理者かどうかのチェック
     def admin?
         role == 'admin'
     end
+    #管理者でないかどうかのチェック
     def not_admin?
         !admin?
     end
@@ -61,6 +63,7 @@ class User < ActiveRecord::Base
 
     private
 
+    #ダミーメールの生成
     def self.dummy_email(auth)
         "#{auth.uid}-#{auth.provider}@example.com"
     end
