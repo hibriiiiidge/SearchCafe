@@ -1,28 +1,52 @@
-== README
+# TodoNote
+TodoNote is task management web application.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+- Ruby 2.4.1
+- Ruby on Rails 5.1.2
+- PostgreSQL 9.6.3
 
-* Ruby version
+## デプロイ方法
 
-* System dependencies
+- Herokuのアカウントを登録する
+- Heroku CLIをインストールする
 
-* Configuration
+- パッケージをダウンロードしてイントールする場合は下記のページからダウンロードする
+https://devcenter.heroku.com/articles/getting-started-with-ruby#set-up
 
-* Database creation
+- Homebrewを使ってコマンドでインストールする
 
-* Database initialization
+```
+brew install heroku
+```
 
-* How to run the test suite
+- Herokuにログインする
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ heroku login
+```
 
-* Deployment instructions
+- Herokuにアプリケーションを生成する
 
-* ...
+```
+$ heroku create
+```
 
+- masterブランチのソースコードをherokuにpushする（デプロイ）
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+```
+$ git push heroku master
+```
+
+- データベースをmigrateする
+
+```
+$ heroku run rake db:migrate
+```
+
+- アプリケーションをブラウザで確認する
+
+```
+$ heroku open
+```
