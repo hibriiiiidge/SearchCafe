@@ -18,7 +18,7 @@ TodoNote is task management web application.
   - Homebrewを使ってコマンドでインストールする場合
   
     ```
-    brew install heroku
+    $ brew install heroku
     ```
 
 - Herokuにログインする
