@@ -12,14 +12,14 @@ TodoNote is task management web application.
 - Herokuのアカウントを登録する
 - Heroku CLIをインストールする
 
-- パッケージをダウンロードしてイントールする場合は下記のページからダウンロードする
-https://devcenter.heroku.com/articles/getting-started-with-ruby#set-up
+  - パッケージをダウンロードしてイントールする場合は下記のページからダウンロードする
+    https://devcenter.heroku.com/articles/getting-started-with-ruby#set-up
 
-- Homebrewを使ってコマンドでインストールする
+  - Homebrewを使ってコマンドでインストールする
 
-```
-brew install heroku
-```
+    ```
+    brew install heroku
+    ```
 
 - Herokuにログインする
 
