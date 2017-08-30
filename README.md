@@ -34,7 +34,7 @@ $ heroku login
 $ heroku create
 ```
 
-- masterブランチのソースコードをherokuにpushする（デプロイ）
+- masterブランチ（以下、master）のソースコードをherokuにpushする（デプロイ）
 
 ```
 $ git push heroku master
@@ -53,11 +53,23 @@ $ heroku open
 ```
 
 ## デプロイ方法(2回目以降)
+- masterを最新の状態にする
 
-- masterブランチのソースコードをherokuにpushする（デプロイ）
+```
+$ git checkout master
+$ git pull
+```
+
+- masterのソースコードをherokuにpushする（デプロイ）
 
 ```
 $ git push heroku master
+```
+
+- データベースをmigrateする
+
+```
+$ heroku run rake db:migrate
 ```
 
 - アプリケーションをブラウザで確認する
