@@ -60,7 +60,7 @@ $ git checkout master
 $ git pull
 ```
 
-- masterのソースコードをherokuにpushする（デプロイ）
+- masterをherokuにpushする（デプロイ）
 
 ```
 $ git push heroku master
