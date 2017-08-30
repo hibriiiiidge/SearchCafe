@@ -7,7 +7,7 @@ TodoNote is task management web application.
 - Ruby on Rails 5.1.2
 - PostgreSQL 9.6.3
 
-## セットアップ方法 (最初に一回だけやるもの)
+## セットアップ方法 (初回の設定とデプロイまでの流れ)
 
 - Herokuのアカウントを登録する
 - Heroku CLIをインストールする
@@ -52,7 +52,7 @@ $ heroku run rake db:migrate
 $ heroku open
 ```
 
-## デプロイ方法(2回目以降のデプロイでもやるもの)
+## デプロイ方法(2回目以降)
 
 - masterブランチのソースコードをherokuにpushする（デプロイ）
 
